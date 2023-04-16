@@ -6,7 +6,7 @@ const Login = () => {
 
     // Rcd ta AuthProvider function.............. 
     const {signIn} = useContext(AuthContext);
-    console.log(signIn);
+    // console.log(signIn);
 
     const handleLoginUser = (event) => {
         event.preventDefault();
