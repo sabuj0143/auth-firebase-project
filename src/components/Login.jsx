@@ -5,7 +5,7 @@ import { AuthContext } from '../providers/AuthProviders';
 const Login = () => {
 
     // Rcd ta AuthProvider function.............. 
-    const {signIn} = useContext(AuthContext);
+    const { signIn, signInWithGoogle } = useContext(AuthContext);
     // console.log(signIn);
 
     const handleLoginUser = (event) => {
@@ -17,15 +17,25 @@ const Login = () => {
 
         // Set the Register System ................
         signIn(email, password)
+            .then(result => {
+                const loggedUser = result.user
+                console.log(loggedUser);
+                form.reset();
+            })
+            .catch(error => {
+                console.log(error.massage);
+            })
+    };
+    const handleSignInGoogle = () => {
+        signInWithGoogle()
         .then(result => {
             const loggedUser = result.user
             console.log(loggedUser);
-            form.reset();
         })
         .catch(error => {
-            console.log(error.massage);
+            console.log(error);
         })
-    };
+    }
     return (
         <div className="hero min-h-screen bg-base-200">
             <div className="hero-content flex-col ">
@@ -56,6 +66,12 @@ const Login = () => {
                     <label className="label mb-10 mx-auto">
                         <Link to="/register" className="label-text-alt link link-hover">New to P-hero? Register Now...</Link>
                     </label>
+
+
+                    <label className="label mb-10 mx-auto">
+                        <Link to="/register" className="label-text-alt link link-hover"><button onClick={handleSignInGoogle} className="btn btn-active btn-primary">Google Login</button></Link>
+                    </label>
+
                 </div>
             </div>
         </div>
